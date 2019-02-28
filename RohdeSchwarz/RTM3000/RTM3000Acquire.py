@@ -6,8 +6,6 @@ import datetime
 import numpy as np
 import argparse
 
-import matplotlib.pyplot as plt
-
 from RTM3000 import RTM3000
 
 # Create the command line arguments
@@ -40,7 +38,7 @@ with open(args.output + "/log.txt", 'a') as log:
         # Wait for the next trigger on the RTM
         rtm.waitForTrigger()
         print("Trigger")
-	
+
         # Log the approximate trigger time
         log.write("--------------------------------\n")
         log.write("Triggered at %s\n"%(str(datetime.datetime.now())))
