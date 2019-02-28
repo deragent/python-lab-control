@@ -10,16 +10,21 @@ import matplotlib.pyplot as plt
 
 from RTM3000 import RTM3000
 
-
-parser = argparse.ArgumentParser(description='Acquire a waveform on every trigger.')
+# Create the command line arguments
+parser = argparse.ArgumentParser(
+    description='Acquire a waveform on every trigger.',
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter
+)
 parser.add_argument("-o", "--output", required=True, help='Output Folder, needs to exist!')
 parser.add_argument("-i", "--ip", default="192.168.1.2", help="IP of the RTM device.")
 parser.add_argument("-p", "--port", type=int, default=5025, help="SCPI / Remote command port of the RTM device.")
 parser.add_argument("-c", "--channels", type=int, nargs="+", default=[1, 2], choices=range(1,5), help="The channels for which the data should be downloaded from the RTM device.")
 args = parser.parse_args()
 
+# Init the RTM device connection
 rtm = RTM3000(args.ip, args.port)
 
+# Query for the RTM device ID
 print(rtm.query("*IDN?", True))
 
 # Configure all channels to record all the data in the buffer
