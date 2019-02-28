@@ -34,7 +34,8 @@ with open(args.output + "/log.txt", 'a') as log:
     while True:
         # Wait for the next trigger on the RTM
         rtm.waitForTrigger()
-
+        print("Trigger")
+	
         # Log the approximate trigger time
         log.write("--------------------------------\n")
         log.write("Triggered at %s\n"%(str(datetime.datetime.now())))
@@ -42,6 +43,7 @@ with open(args.output + "/log.txt", 'a') as log:
         # Download all the data
         data = [None]
         for ch in args.channels:
+            print("Download CH%i"%(ch))
             time, values = rtm.downloadChannel(ch)
             data.append(values)
         data[0] = time
