@@ -40,7 +40,7 @@ with open(args.output + "/log.txt", 'a') as log:
         log.write("Triggered at %s\n"%(str(datetime.datetime.now())))
 
         # Download all the data
-        data = [Null]
+        data = [None]
         for ch in args.channels:
             time, values = rtm.downloadChannel(ch)
             data.append(values)
@@ -48,9 +48,10 @@ with open(args.output + "/log.txt", 'a') as log:
 
         data = np.array(data)
 
+
         # Write the data to a file
         file = args.output + "/Data_%i.tsv"%(NFile)
-        np.savetxt(file, data, delimiter='\t')
+        np.savetxt(file, data.T, delimiter='\t')
 
         NFile += 1
 
